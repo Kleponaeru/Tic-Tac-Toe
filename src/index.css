@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Roboto+Slab:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&family=Roboto+Slab:wght@400;700&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: "Roboto Slab", sans-serif;
   line-height: 1.5;
-
-  color: #ebe7ef;
-
+  color: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,33 +16,35 @@ html {
 }
 
 body {
-  background: radial-gradient(
-      circle at top,
-      rgba(241, 210, 70, 0.98),
-      rgba(250, 176, 103, 0.87)
-    ),
-    url('bg-pattern-dark.png');
-  background-repeat: repeat;
-  background-size: 100% 100%, 30% 30%, 100% 100%;
+  background: linear-gradient(
+    45deg,
+    #0a0a1a,
+    #1a1a3a
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 110rem;
+  overflow: hidden;
 }
 
 header {
   text-align: center;
+  margin-top: 48px;
 }
 
 header img {
   width: 8rem;
   object-fit: contain;
   margin: 3rem auto 1rem auto;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8)); /* Neon cyan glow */
 }
 
 h1 {
-  font-family: 'Caprasimo', cursive;
+  font-family: "Caprasimo", cursive;
   font-size: 3rem;
   margin: 0 auto 3rem auto;
-  color: #3f3b00;
+  color: #00ffcc; /* Neon cyan */
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc85; /* Neon glow */
 }
 
 #game-container {
@@ -52,9 +52,103 @@ h1 {
   margin: 3rem auto;
   padding: 2rem;
   border-radius: 6px;
-  background: linear-gradient(#383624, #282617);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    #0a0a1a,
+    #1a1a3a
+  ); /* Darker background for neon */
+  box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc; /* Neon cyan glow */
   position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  header img {
+    width: 6rem !important; /* Ensure logo size changes on mobile */
+    margin: 1.5rem auto 0.5rem auto !important;
+  }
+
+  h1 {
+    font-size: 2rem !important; /* Ensure title size changes */
+    margin: 0 auto 1.5rem auto !important;
+  }
+
+  #game-container {
+    max-width: 90% !important; /* Ensure full width on mobile */
+    margin: 1.5rem auto !important;
+    padding: 1rem !important;
+  }
+
+  #players {
+    flex-direction: column !important; /* Ensure vertical stacking */
+    gap: 1rem !important;
+  }
+
+  #players li {
+    width: 100% !important; /* Ensure full width for players */
+    justify-content: center !important;
+  }
+
+  .player-name {
+    width: 5rem !important; /* Ensure smaller name width */
+    font-size: 0.8rem !important;
+  }
+
+  .player input {
+    width: 5rem !important; /* Ensure smaller input width */
+    font-size: 0.8rem !important;
+  }
+
+  #game-board {
+    gap: 0.8rem !important; /* Ensure reduced gap */
+    margin: 1.5rem 0 !important;
+  }
+
+  #game-board button {
+    width: 4.5rem !important; /* Ensure smaller cell size */
+    height: 4.5rem !important;
+    font-size: 2.5rem !important; /* Ensure smaller text size for X and O */
+    padding: 0.3rem !important;
+    border: 2px solid #00ffcc; /* Neon cyan border, no !important needed (unlikely to conflict) */
+    box-shadow: 0 0 8px #00ffcc, 0 0 15px #00ffcc; /* Neon glow, no !important needed */
+  }
+
+  #game-board button:hover {
+    box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff !important;
+  }
+
+  #game-over {
+    padding: 1rem !important;
+  }
+
+  #game-over h2 {
+    font-size: 2.5rem !important;
+  }
+
+  #game-over p {
+    font-size: 1.2rem !important;
+  }
+
+  #game-over button {
+    font-size: 1rem !important;
+    padding: 0.3rem 0.6rem !important;
+  }
+
+  #log {
+    max-width: 90% !important;
+    margin: 1rem auto !important;
+  }
+
+  #log li {
+    font-size: 0.8rem !important;
+    margin: 0.4rem !important;
+  }
+
+  #game-hints h2 {
+    font-size: 1.2rem !important;
+  }
+
+  #game-hints ul {
+    font-size: 0.9rem !important;
+  }
 }
 
 #players {
@@ -75,29 +169,31 @@ h1 {
 }
 
 #players.highlight-player li.active {
-  border-color: #f6e35a;
-  animation: pulse 2s infinite ease-in-out;
+  border-color: #ff00ff; /* Neon pink */
+  animation: neonPulse 2s infinite ease-in-out;
 }
 
 #players.highlight-player li.active .player-name,
 #players.highlight-player li.active .player-symbol {
-  color: #f6e35a;
+  color: #ff00ff; /* Neon pink */
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; /* Neon glow */
 }
 
 #players button {
   width: 3rem;
   border: none;
   background: none;
-  color: #c3ba78;
+  color: #00ffff; /* Neon cyan */
   font-size: 0.9rem;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: color 0.2s, text-shadow 0.2s;
   padding: 0.5rem 0.25rem 0.25rem 0.25rem;
   text-align: center;
 }
 
 #players button:hover {
-  color: #f8ca31;
+  color: #ff00ff; /* Neon pink */
+  text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff; /* Enhanced neon glow on hover */
 }
 
 .player {
@@ -111,13 +207,14 @@ h1 {
   display: inline-block;
   width: 10rem;
   font-size: 1rem;
-  color: #e1dec7;
+  color: #00ffff; /* Neon cyan */
   text-transform: uppercase;
   margin: 0;
   padding: 0.5rem;
   border-radius: 4px;
   text-overflow: ellipsis;
   text-align: center;
+  text-shadow: 0 0 8px #00ffff; /* Subtle neon glow */
 }
 
 .player input {
@@ -126,16 +223,19 @@ h1 {
   width: 10rem;
   border: none;
   padding: 0.5rem;
-  animation: pulse-text 2s infinite;
-  background-color: #46432f;
+  animation: neonTextPulse 2s infinite;
+  background-color: #1a1a3a; /* Darker input background */
   text-align: center;
   text-transform: uppercase;
+  border: 2px solid #00ffcc; /* Neon cyan border */
+  box-shadow: 0 0 10px #00ffcc; /* Neon glow */
 }
 
 .player-symbol {
   margin-left: 1rem;
   font-size: 1rem;
-  color: #e1dec7;
+  color: #00ffff; /* Neon cyan */
+  text-shadow: 0 0 10px #00ffff; /* Neon glow */
 }
 
 ol {
@@ -151,12 +251,12 @@ ol {
 #pre-game button {
   cursor: pointer;
   background: none;
-  color: #f8c031;
+  color: #ff00ff; /* Neon pink */
   border: none;
-  font-family: 'Caprasimo', cursive;
+  font-family: "Caprasimo", cursive;
   font-size: 4rem;
-  text-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
-  animation: pulse-text-size 2s infinite ease-out;
+  text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff; /* Neon glow */
+  animation: neonPulseSize 2s infinite ease-out;
 }
 
 #game-board {
@@ -172,7 +272,7 @@ ol {
 #game-board ol {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center;  
   gap: 2rem;
   margin: 0;
   padding: 0;
@@ -182,12 +282,20 @@ ol {
   width: 8rem;
   height: 8rem;
   border: none;
-  background: #aca788;
-  color: #3f3b00;
+  background: #1a1a3a;
+  color: #00ffff;
   font-size: 5rem;
   cursor: pointer;
-  font-family: 'Caprasimo', cursive;
+  font-family: "Caprasimo", cursive;
   padding: 1rem;
+  border: 3px solid #00ffcc9e;
+  box-shadow: 0 0 15px #00ffcc91, 0 0 30px #00ffcc2f; /* Neon glow */
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+#game-board button:hover {
+  box-shadow: 0 0 25px #ff00ff, 0 0 50px #ff00ff6f; /* Neon pink glow on hover */
+  transform: scale(1.1);
 }
 
 #game-over {
@@ -200,22 +308,24 @@ ol {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(40, 38, 23, 0.95);
-  animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
+  background-color: rgba(10, 10, 26, 0.95); /* Darker overlay */
+  animation: neonPopIn 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
 }
 
 #game-over h2 {
-  font-family: 'Caprasimo', cursive;
+  font-family: "Caprasimo", cursive;
   font-size: 4rem;
   text-align: center;
-  color: #fcd256;
+  color: #ff00ff; /* Neon pink */
+  text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff; /* Neon glow */
   margin: 0;
 }
 
 #game-over p {
   font-size: 2rem;
   text-align: center;
-  color: #e1dec7;
+  color: #00ffff; /* Neon cyan */
+  text-shadow: 0 0 10px #00ffff; /* Neon glow */
 }
 
 #game-over button {
@@ -223,51 +333,58 @@ ol {
   margin: 0 auto;
   font-size: 1.5rem;
   background: none;
-  border: 2px solid #fcd256;
-  color: #fcd256;
+  border: 2px solid #ff00ff; /* Neon pink */
+  color: #ff00ff; /* Neon pink */
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s, color 0.2s;
-  box-shadow: 0 0 8px rgba(255, 187, 0, 0.4);
+  transition: all 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; /* Neon glow */
 }
 
 #game-over button:hover {
-  background: #fcd256;
-  color: #3f3b00;
+  background: #ff00ff; /* Neon pink fill */
+  color: #0a0a1a; /* Dark background for contrast */
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255, 187, 0, 0.8);
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; /* Enhanced neon glow */
 }
 
 #log {
   max-width: 20rem;
-  color: #3f3b00;
+  color: #00ffff; /* Neon cyan */
   list-style: none;
   margin: 2rem auto;
   padding: 0;
   text-align: center;
+  text-shadow: 0 0 8px #00ffff; /* Subtle neon glow */
 }
 
 #log li {
   border-radius: 4px;
-  animation: slide-in-from-left 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  animation: slideInNeon 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
   margin: 0.75rem;
+  color: #ff00ff; /* Neon pink for log items */
+  text-shadow: 0 0 10px #ff00ff; /* Neon glow */
 }
 
 #log li.highlighted {
-  background-color: #3f3b00;
-  color: white;
+  background-color: #1a1a3a; /* Dark background */
+  box-shadow: 0 0 15px #00ffcc; /* Neon cyan glow */
+  color: #ffffff; /* White for contrast */
 }
 
 #game-hints {
   text-align: center;
-  color: #46432f;
+  color: #00ffff; /* Neon cyan */
+  text-shadow: 0 0 10px #00ffff; /* Neon glow */
 }
 
 #game-hints h2 {
-  font-family: 'Caprasimo', cursive;
+  font-family: "Caprasimo", cursive;
   font-size: 2rem;
   margin: 0;
+  color: #ff00ff; /* Neon pink */
+  text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff; /* Neon glow */
 }
 
 #game-hints ul {
@@ -280,72 +397,84 @@ ol {
   cursor: pointer;
   border: none;
   background: transparent;
-  color: #23221f;
+  color: #00ffff; /* Neon cyan */
   font: inherit;
   margin-top: 1.5rem;
+  text-shadow: 0 0 10px #00ffff; /* Neon glow */
 }
 
-@keyframes slide-in-from-left {
+/* New Neon Animations */
+@keyframes neonPulse {
+  0% {
+    border-color: #ff00ff;
+    box-shadow: 0 0 0 0 #ff00ff, 0 0 10px #ff00ff;
+  }
+  50% {
+    border-color: #00ffcc;
+    box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  }
+  100% {
+    border-color: #ff00ff;
+    box-shadow: 0 0 0 0 #ff00ff, 0 0 10px #ff00ff;
+  }
+}
+
+@keyframes neonTextPulse {
+  0% {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  }
+  50% {
+    color: #ff00ff;
+    text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+  }
+  100% {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  }
+}
+
+@keyframes neonPulseSize {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+}
+
+@keyframes slideInNeon {
   0% {
     opacity: 0;
     transform: translateX(-30%);
+    text-shadow: 0 0 0 #ff00ff;
   }
   100% {
     opacity: 1;
     transform: translateX(0);
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
   }
 }
 
-@keyframes pulse-text {
-  0% {
-    color: #e1dec7;
-  }
-  50% {
-    color: #9f9d83;
-  }
-  100% {
-    color: #e1dec7;
-  }
-}
-
-@keyframes pulse-text-size {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    border-color: #f6e35a;
-    box-shadow: 0 0 0 0 rgba(246, 227, 90, 0.4);
-  }
-  50% {
-    border-color: #f8c031;
-    box-shadow: 0 0 0 0.5rem rgba(248, 165, 49, 0);
-  }
-  100% {
-    border-color: #f6e35a;
-    box-shadow: 0 0 0 0 rgba(246, 227, 90, 0);
-  }
-}
-
-/* Fancy animation for showing the "Game Over" element */
-@keyframes pop-in {
+@keyframes neonPopIn {
   0% {
     transform: scale(0);
     opacity: 0;
+    box-shadow: 0 0 0 #ff00ff;
   }
   80% {
     transform: scale(1.1);
     opacity: 1;
+    box-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
   }
   100% {
     transform: scale(1);
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
   }
 }
